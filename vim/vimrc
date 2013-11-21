@@ -1,0 +1,198 @@
+set nocompatible               " be iMproved
+filetype off                   " required!
+let g:is_posix = 1
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'jpo/vim-railscasts-theme'
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-markdown'
+Bundle 'lukaszb/vim-web-indent'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'scrooloose/syntastic.git'
+Bundle 'golangtw/gocode.vim'
+Bundle 'ervandew/supertab'
+" Bundle 'scrooloose/nerdtree'
+Bundle 'kien/ctrlp.vim'
+Bundle 'briancollins/vim-jst'
+Bundle 'vim-scripts/bufkill.vim'
+Bundle 'nathanaelkane/vim-command-w.git'
+Bundle 'juvenn/mustache.vim.git'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'jnwhiteh/vim-golang'
+Bundle 'majutsushi/tagbar'
+Bundle 'spf13/vim-colors'
+Bundle 'epmatsw/ag.vim'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
+Bundle 'tacahiroy/ctrlp-funky'
+
+filetype plugin indent on     " required!
+filetype plugin on
+
+if has('gui_macvim')
+  " MacVim
+
+  Bundle 'SirVer/ultisnips'
+  Bundle 'mbadran/headlights'
+
+  set guifont=Menlo\ Regular:h12
+  " Hide Toolbar in MacVim
+  if has("gui_running")
+    set guioptions=egmrt
+    set guifont=Inconsolata:h14
+  endif
+
+  " Close buffers, not the window, when CMD-W is pressed
+  macmenu &File.Close key=<nop>
+  nmap <D-w> :CommandW<CR>
+  imap <D-w> <Esc>:CommandW<CR>
+endif
+
+if has("mouse")
+  set mouse=a
+  set mousehide
+endif
+
+
+" Backups
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/tmp
+
+" UI
+" colorscheme railscasts
+" colorscheme jellybeans
+colorscheme ir_black
+set cursorline
+set number
+set scrolloff=2
+set nowrap
+au VimEnter * :IndentGuidesEnable " Always show indent guides
+
+" Status Bar
+set ruler                   " Show the cursor position all the time
+set showcmd                 " Display incomplete commands
+set showmode                " Display current mode
+set ls=2                    " Always show status bar
+set cmdheight=2
+
+" Behavior
+set autoread		" Automatically reload changed files
+set mousehide		" Hide mouse after chars typed
+set hidden          " Enable unsaved buffers
+
+" Shift width
+autocmd FileType * set tabstop=4|set shiftwidth=4
+autocmd FileType ruby set tabstop=2|set shiftwidth=2
+autocmd FileType css,html,ruby,erb,haml autocmd BufWritePre <buffer> :%s/\s\+$//e
+set expandtab
+
+" Highlight trailing whitespace and tab characters. Note that the foreground
+" colors are overridden here, so this only works with the "set list" settings
+" below.
+autocmd ColorScheme * highlight ExtraWhitespace ctermfg=red guifg=red
+highlight ExtraWhitespace ctermfg=red guifg=red cterm=bold gui=bold
+match ExtraWhitespace /\s\+$\|\t/
+
+" Ctrl-P mappings
+let g:ctrlp_extensions = ['funky']
+map <leader>b :CtrlPBuffer<cr>
+map <leader>m :CtrlPMRU<cr>
+map <leader>f :CtrlP<CR>
+
+" nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+" nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+" Ctrl-A/E go to beginning and end of line like readline
+map <C-a> <Home>
+map <C-e> <End>
+
+
+" use Ctrl+L to toggle the line number counting method
+function! g:ToggleNuMode()
+    if(&rnu == 1)
+        set nu
+    else
+        set rnu
+    endif
+endfunc
+nnoremap <C-L> :call g:ToggleNuMode()<cr>
+
+" Tagbar
+let g:tagbar_ctags_bin='/usr/local/ctags/bin/ctags'
+let g:tagbar_width=26 " Default is 40
+map <Leader>y :TagbarToggle<cr>
+let g:tagbar_type_coffee = {
+            \ 'ctagstype' : 'coffee',
+            \ 'kinds'     : [
+            \ 'c:classes',
+            \ 'm:methods',
+            \ 'f:functions',
+            \ 'v:variables',
+            \ 'f:fields',
+            \ ]
+            \ }
+let s:ctags_opts = '
+            \ --langdef=coffee
+            \ --langmap=coffee:.coffee
+            \ --regex-coffee=/(^|=[[:space:]])*class[[:space:]]([A-Za-z]+\.)*([A-Za-z]+)([[:space:]]extends[[:space:]][A-Za-z.]+)?$/\3/c,class/
+            \ --regex-coffee=/^[[:space:]]*(module\.)?(exports\.)?@?([A-Za-z.]+):.*[-=]>.*$/\3/m,method/
+            \ --regex-coffee=/^[[:space:]]*(module\.)?(exports\.)?([A-Za-z.]+)[[:space:]]+=.*[-=]>.*$/\3/f,function/
+            \ --regex-coffee=/^[[:space:]]*([A-Za-z.]+)[[:space:]]+=[^->\n]*$/\1/v,variable/
+            \ --regex-coffee=/^[[:space:]]*@([A-Za-z.]+)[[:space:]]+=[^->\n]*$/\1/f,field/
+            \ --regex-coffee=/^[[:space:]]*@([A-Za-z.]+):[^->\n]*$/\1/f,staticField/
+            \ --regex-coffee=/^[[:space:]]*([A-Za-z.]+):[^->\n]*$/\1/f,field/
+            \ --regex-coffee=/(constructor:[[:space:]]\()@([A-Za-z.]+)/\2/f,field/
+            \ --regex-coffee=/(constructor:[[:space:]]\()@[A-Za-z.]+(,[[:space:]]@([A-Za-z.]+)){0}/\3/f,field/
+            \ --regex-coffee=/(constructor:[[:space:]]\()@[A-Za-z.]+(,[[:space:]]@([A-Za-z.]+)){1}/\3/f,field/
+            \ --regex-coffee=/(constructor:[[:space:]]\()@[A-Za-z.]+(,[[:space:]]@([A-Za-z.]+)){2}/\3/f,field/
+            \ --regex-coffee=/(constructor:[[:space:]]\()@[A-Za-z.]+(,[[:space:]]@([A-Za-z.]+)){3}/\3/f,field/
+            \ --regex-coffee=/(constructor:[[:space:]]\()@[A-Za-z.]+(,[[:space:]]@([A-Za-z.]+)){4}/\3/f,field/
+            \ --regex-coffee=/(constructor:[[:space:]]\()@[A-Za-z.]+(,[[:space:]]@([A-Za-z.]+)){5}/\3/f,field/
+            \ --regex-coffee=/(constructor:[[:space:]]\()@[A-Za-z.]+(,[[:space:]]@([A-Za-z.]+)){6}/\3/f,field/
+            \ --regex-coffee=/(constructor:[[:space:]]\()@[A-Za-z.]+(,[[:space:]]@([A-Za-z.]+)){7}/\3/f,field/
+            \ --regex-coffee=/(constructor:[[:space:]]\()@[A-Za-z.]+(,[[:space:]]@([A-Za-z.]+)){8}/\3/f,field/
+            \ --regex-coffee=/(constructor:[[:space:]]\()@[A-Za-z.]+(,[[:space:]]@([A-Za-z.]+)){9}/\3/f,field/'
+
+let $CTAGS = substitute(s:ctags_opts, '\v\([nst]\)', '\\', 'g')
+
+let g:tagbar_type_javascript = {
+    \ 'ctagsbin' : '/usr/local/bin/jsctags'
+    \ }
+
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+    \ }
+
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+    \ }
+
+au InsertEnter * :set nu
+au InsertLeave * :set rnu
+au FocusLost * :set nu
+au FocusGained * :set rnu
+
+autocmd FileType * highlight ColorColumn ctermbg=233 guibg=#111111
+set colorcolumn=81
