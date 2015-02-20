@@ -30,6 +30,8 @@ Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 Bundle 'tpope/vim-speeddating'
 Bundle 'danro/rename.vim'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'majutsushi/tagbar'
 
 filetype plugin indent on     " required!
 filetype plugin on
