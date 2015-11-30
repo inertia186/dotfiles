@@ -1,0 +1,22 @@
+"*":
+  "exception-reporting":
+    userId: "d4dcbafc-7ad7-c5d3-d475-7eb256efd78d"
+  welcome:
+    showOnStartup: false
+  core:
+    themes: [
+      "atom-dark-ui"
+      "atom-dark-syntax"
+    ]
+  editor:
+    invisibles: {}
+    showInvisibles: true
+    tabType: "soft"
+  "ruby-test":
+    specFramework: "minitest"
+    testFramework: "minitest"
+    testAllCommand: "rake test"
+    minitestAllCommand: "rake test"
+  "linter-haml": {}
+  linter: {}
+  "vim-mode": {}
