@@ -1,6 +1,10 @@
+set clipboard=unnamed
 set nocompatible               " be iMproved
 filetype off                   " required!
 let g:is_posix = 1
+
+" filetype plugin indent on
+syntax on
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -22,7 +26,7 @@ Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'nathanaelkane/vim-command-w.git'
 Bundle 'juvenn/mustache.vim.git'
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'majutsushi/tagbar'
+" Bundle 'majutsushi/tagbar'
 Bundle 'spf13/vim-colors'
 Bundle 'rking/ag.vim'
 Bundle 'airblade/vim-gitgutter'
@@ -30,8 +34,9 @@ Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 Bundle 'tpope/vim-speeddating'
 Bundle 'danro/rename.vim'
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 Bundle 'majutsushi/tagbar'
+Bundle 'christoomey/vim-tmux-navigator'
 
 filetype plugin indent on     " required!
 filetype plugin on
