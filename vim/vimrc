@@ -1,4 +1,5 @@
-set clipboard=unnamed
+"set clipboard=unnamed
+set clipboard=unnamedplus,unnamed,autoselect
 set nocompatible               " be iMproved
 filetype off                   " required!
 let g:is_posix = 1
