@@ -56,7 +56,7 @@ if has('gui_macvim')
   endif
 
   " Close buffers, not the window, when CMD-W is pressed
-  macmenu &File.Close key=<nop>
+  "macmenu &File.Close key=<nop>
   nmap <D-w> :CommandW<CR>
   imap <D-w> <Esc>:CommandW<CR>
 endif
@@ -75,12 +75,12 @@ set directory=~/.vim/tmp
 " UI
 " colorscheme railscasts
 " colorscheme jellybeans
-colorscheme ir_black
+" colorscheme ir_black
 set cursorline
 set number
 set scrolloff=2
 set nowrap
-au VimEnter * :IndentGuidesEnable " Always show indent guides
+"au VimEnter * :IndentGuidesEnable " Always show indent guides
 
 " Status Bar
 set ruler                   " Show the cursor position all the time
