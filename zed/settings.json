@@ -17,5 +17,7 @@
   },
   "hard_tabs": false,
   "tab_size": 2,
-  "format_on_save": "off"
+  "format_on_save": "off",
+  "preferred_line_length": 80,
+  "soft_wrap": "preferred_line_length"
 }
