@@ -10,7 +10,7 @@ syntax on
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+Bundle 'VundleVim/Vundle.vim', {'name': 'vundle'}
 Bundle 'vim-airline/vim-airline'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'tpope/vim-rails'
