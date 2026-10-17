@@ -91,20 +91,8 @@ map <leader>b :CtrlPBuffer<cr>
 map <leader>m :CtrlPMRU<cr>
 map <leader>f :CtrlP<CR>
 
-" Ctrl-A/E go to beginning and end of line like readline
-map <C-a> <Home>
+" Ctrl-E goes to end of line like readline
 map <C-e> <End>
-
-
-" use Ctrl+L to toggle the line number counting method
-function! g:ToggleNuMode()
-    if(&rnu == 1)
-        set nu
-    else
-        set rnu
-    endif
-endfunc
-nnoremap <C-L> :call g:ToggleNuMode()<cr>
 
 au InsertEnter * :set nu
 au InsertLeave * :set rnu
