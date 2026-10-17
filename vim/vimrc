@@ -11,32 +11,14 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'jpo/vim-railscasts-theme'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-markdown'
-Bundle 'lukaszb/vim-web-indent'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'rainux/vim-vala'
-Bundle 'fatih/vim-go'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tacahiroy/ctrlp-funky'
+Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'nathanaelkane/vim-command-w.git'
-Bundle 'juvenn/mustache.vim.git'
-Bundle 'vim-ruby/vim-ruby'
-" Bundle 'majutsushi/tagbar'
-Bundle 'spf13/vim-colors'
-Bundle 'rking/ag.vim'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/dash.vim'
 Bundle 'tpope/vim-speeddating'
 Bundle 'danro/rename.vim'
-" Bundle 'Valloric/YouCompleteMe'
-Bundle 'majutsushi/tagbar'
 Bundle 'christoomey/vim-tmux-navigator'
 
 filetype plugin indent on     " required!
@@ -46,7 +28,6 @@ if has('gui_macvim')
   " MacVim
 
   Bundle 'SirVer/ultisnips'
-  Bundle 'mbadran/headlights'
 
   set guifont=Menlo\ Regular:h12
   " Hide Toolbar in MacVim
@@ -73,8 +54,6 @@ set backupdir=~/.vim/backup
 set directory=~/.vim/tmp
 
 " UI
-" colorscheme railscasts
-" colorscheme jellybeans
 " colorscheme ir_black
 set cursorline
 set number
@@ -108,14 +87,10 @@ highlight ExtraWhitespace ctermfg=red guifg=red cterm=bold gui=bold
 match ExtraWhitespace /\s\+$\|\t/
 
 " Ctrl-P mappings
-let g:ctrlp_extensions = ['funky']
 map <leader>b :CtrlPBuffer<cr>
 map <leader>m :CtrlPMRU<cr>
 map <leader>f :CtrlP<CR>
 
-" nnoremap <Leader>fu :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-" nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 " Ctrl-A/E go to beginning and end of line like readline
 map <C-a> <Home>
 map <C-e> <End>
@@ -130,21 +105,6 @@ function! g:ToggleNuMode()
     endif
 endfunc
 nnoremap <C-L> :call g:ToggleNuMode()<cr>
-
-" Tagbar
-let g:tagbar_ctags_bin='/opt/local/bin/ctags'
-let g:tagbar_width=26 " Default is 40
-map <Leader>y :TagbarToggle<cr>
-let g:tagbar_type_ruby = {
-    \ 'kinds' : [
-        \ 'm:modules',
-        \ 'c:classes',
-        \ 'd:describes',
-        \ 'C:contexts',
-        \ 'f:methods',
-        \ 'F:singleton methods'
-    \ ]
-\ }
 
 au InsertEnter * :set nu
 au InsertLeave * :set rnu
