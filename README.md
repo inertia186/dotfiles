@@ -1,5 +1,7 @@
 # Dot Files
 
+[tmux + Vim cheat sheet](CHEAT-SHEET.md)
+
 ## Install
 
 ```bash
